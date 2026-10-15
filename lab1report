@@ -1,0 +1,184 @@
+### 1. Зареєструватись в системі під обліковим записом, що збігається з логіном студентської пошти (формат n.surname).
+```
+login as: student
+student@192.168.0.185's password:
+Welcome to Ubuntu 14.04.3 LTS (GNU/Linux 3.13.0-63-generic i686)
+Last login: Wed Oct 14 10:08:03 2026 from 192.168.0.178
+```
+
+---
+
+
+### 2. Використовуючи команду passwd, змінити пароль. Вивчити основні параметри команди. Який системний файл вона змінює?
+```
+student@CsnKhai:~$ sudo passwd
+[sudo] password for student:
+Enter new UNIX password:
+Retype new UNIX password:
+passwd: password updated successfully
+```
+
+
+---
+
+
+### 3. Визначити користувачів, зареєстрованих у системі, і які команди вони виконують. Яку додаткову інформацію можна отримати при виконанні команди?
+```
+student@CsnKhai:~$ who -w
+student  + pts/0        2026-10-15 15:17 (192.168.0.178)
+student@CsnKhai:~$ ps -u "$USER"
+  PID TTY          TIME CMD
+  851 ?        00:00:00 sshd
+  869 ?        00:00:00 sshd
+  870 ?        00:00:00 sftp-server
+  873 pts/0    00:00:00 bash
+  883 ?        00:00:00 bash
+ 3011 ?        00:00:00 sleep
+ 3012 pts/0    00:00:00 ps
+student@CsnKhai:~$
+```
+
+
+---
+
+
+### 4. Змінити особисту інформацію.
+```
+student@CsnKhai:~$ finger student
+Login: student                          Name: Student KhAI
+Directory: /home/student                Shell: /bin/bash
+On since Thu Oct 15 15:17 (UTC) on pts/0 from 192.168.0.178
+   5 seconds idle
+No mail.
+No Plan.
+student@CsnKhai:~$ chfn student
+Password:
+Changing the user information for student
+Enter the new value, or press ENTER for the default
+        Full Name: Student KhAI
+        Room Number []: 17
+        Work Phone []: 5050
+        Home Phone []: 4040
+student@CsnKhai:~$ finger student
+Login: student                          Name: Student KhAI
+Directory: /home/student                Shell: /bin/bash
+Office: 17, x5050                       Home Phone: x4040
+On since Thu Oct 15 15:17 (UTC) on pts/0 from 192.168.0.178
+   3 seconds idle
+No mail.
+No Plan.
+student@CsnKhai:~$
+```
+
+
+---
+
+
+### 5. Освоїти довідкову систему Linux, а також команди man та info. Отримати довідку за розглянутими раніше командами, визначити та описати два ключі для даних команд. Навести приклади.
+```
+student@CsnKhai:~$ man ls
+student@CsnKhai:~$ man passwd
+student@CsnKhai:~$ info coreutils
+student@CsnKhai:~$ ls -l
+total 4
+-rwxrw-r-- 1 student student 36 Oct 14 10:14 script.sh
+-rwxr-xr-x 1 user3   user3    0 Oct 14 09:56 test.txt
+student@CsnKhai:~$ ls -a
+.  ..  .bash_history  .bash_logout  .bashrc  .cache  .profile  script.sh  test.txt  .Xauthority
+student@CsnKhai:~$
+```
+
+---
+
+
+### 6. Вивчити команди more та less за допомогою довідкової системи. За допомогою команд переглянути вміст файлів .bash*.
+```
+student@CsnKhai:~$ ls -la ~/.bash*
+-rw------- 1 student student 1215 Oct 14 10:34 /home/student/.bash_history
+-rw-r--r-- 1 student student  220 Sep 15  2015 /home/student/.bash_logout
+-rw-r--r-- 1 student student 3637 Sep 15  2015 /home/student/.bashrc
+student@CsnKhai:~$ more ~/.bashrc
+# ~/.bashrc: executed by bash(1) for non-login shells.
+# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+# for examples
+
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
+# don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options
+HISTCONTROL=ignoreboth
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# If set, the pattern "**" used in a pathname expansion context will
+# match all files and zero or more directories and subdirectories.
+#shopt -s globstar
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
+
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+    xterm-color) color_prompt=yes;;
+esac
+student@CsnKhai:~$
+```
+
+---
+
+
+### 7. Описати в планах те, що ви працюєте над лабораторною роботою №1.
+```
+man finger
+finger student
+
+???
+```
+
+---
+
+### 8. Вивести вміст домашнього каталогу за допомогою команди ls, визначити його файли та каталоги. Підказка: за допомогою довідкової системи ознайомтеся з командою ls.
+```
+student@CsnKhai:~$ ls -l
+total 4
+-rwxrw-r-- 1 student student 36 Oct 14 10:14 script.sh
+-rwxr-xr-x 1 user3   user3    0 Oct 14 09:56 test.txt
+student@CsnKhai:~$ ls -a
+.  ..  .bash_history  .bash_logout  .bashrc  .cache  .profile  script.sh  test.txt  .Xauthority
+student@CsnKhai:~$ ls -la ~
+total 36
+drwxr-xr-x 3 student student 4096 Oct 15 15:17 .
+drwxr-xr-x 5 root    root    4096 Oct 14 09:50 ..
+-rw------- 1 student student 1215 Oct 14 10:34 .bash_history
+-rw-r--r-- 1 student student  220 Sep 15  2015 .bash_logout
+-rw-r--r-- 1 student student 3637 Sep 15  2015 .bashrc
+drwx------ 2 student student 4096 Sep 15  2015 .cache
+-rw-r--r-- 1 student student  675 Sep 15  2015 .profile
+-rwxrw-r-- 1 student student   36 Oct 14 10:14 script.sh
+-rwxr-xr-x 1 user3   user3      0 Oct 14 09:56 test.txt
+-rw------- 1 student student   53 Oct 15 15:17 .Xauthority
+student@CsnKhai:~$ ls -lh ~
+total 4.0K
+-rwxrw-r-- 1 student student 36 Oct 14 10:14 script.sh
+-rwxr-xr-x 1 user3   user3    0 Oct 14 09:56 test.txt
+```
+
+---
